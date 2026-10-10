@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+    linuxserver:
+        container_name: radarr
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+        ports:
+            - '7878:7878'
+        volumes:
+            - '/dockerConfig/Radarr:/config'
+            - '/srv/media/Filmovi:/movies'
+            - '/srv/torrents/downloads:/downloads'
+        restart: unless-stopped
+        image: 'lscr.io/linuxserver/radarr:latest'

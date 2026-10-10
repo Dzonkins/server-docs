@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+    file-browser:
+        container_name: file-browser
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+        ports:
+            - '8001:80'
+        volumes:
+            - '/srv:/srv'
+            - '/dockerConfig/FileBrowser:/database'
+            - '/dockerConfig/FileBrowser:/config'
+        restart: unless-stopped
+        image: 'filebrowser/filebrowser'

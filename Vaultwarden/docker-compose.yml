@@ -1,0 +1,12 @@
+version: "2"
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    volumes:
+      - /dockerConfig/Vaultwarden:/data/
+    ports:
+      - 8090:80
+    environment:
+        - DOMAIN=https://vw.jellyserver.com
+    restart: unless-stopped

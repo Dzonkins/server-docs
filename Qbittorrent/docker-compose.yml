@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  qbittorrent:
+        container_name: qbittorrent
+        image: ghcr.io/hotio/qbittorrent:latest
+        restart: unless-stopped
+        ports:
+            - '8080:8080'
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+            - WEBUI_PORT=8080
+            - VPN_ENABLED=true
+            - VPN_LAN_NETWORK=192.168.1.0/24
+            - VPN_CONF=wg0
+            - VPN_PROVIDER=pia
+            - VPN_AUTO_PORT_FORWARD=true
+            - VPN_HEALTHCHECK_ENABLED=true
+            - VPN_PIA_USER=p2052771
+            - VPN_PIA_PASS=Dzoniii123
+            - VPN_PIA_PREFERRED_REGION=rs
+            - VPN_PIA_PORT_FORWARD_PERSIST=true
+            - PRIVOXY_ENABLED=false
+            - UNBOUND_ENABLED=false
+        cap_add:
+            - NET_ADMIN
+        volumes:
+            - '/dockerConfig/Qbittorrent:/config'
+            - '/srv:/downloads'
+        devices:
+            - /dev/net/tun:/dev/net/tun
+        sysctls:
+            net.ipv6.conf.all.disable_ipv6: 1
+

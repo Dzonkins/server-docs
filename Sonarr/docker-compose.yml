@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+    sonarr:
+        container_name: sonarr
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+        ports:
+            - '8989:8989'
+        volumes:
+            - '/dockerConfig/Sonarr:/config'
+            - '/srv/media/Serije:/tv'
+            - '/srv/media/Anime:/anime'
+            - '/srv/torrents/downloads:/downloads'
+        restart: unless-stopped
+        image: 'lscr.io/linuxserver/sonarr:latest'

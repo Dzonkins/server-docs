@@ -1,0 +1,22 @@
+services:
+    pihole:
+        container_name: pihole
+        hostname: nikola-server
+        env_file:
+            - .env
+        ports:
+            - '53:53/tcp'
+            - '53:53/udp'
+            - '67:67/udp'
+            - '85:80'
+        environment:
+            - TZ=CET
+            - WEBPASSWORD=${WEBPASSWORD}
+            - FTLCONF_dns_listeningMode=ALL
+        volumes:
+            - '/dockerConfig/Pihole/etc/pihole:/etc/pihole'
+            - '/dockerConfig/Pihole/dnsmasq.d:/etc/dnsmasq.d'
+        cap_add:
+            - NET_ADMIN
+        restart: unless-stopped
+        image: 'pihole/pihole:latest'

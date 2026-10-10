@@ -1,0 +1,14 @@
+services:
+    watchtower:
+        container_name: watchtower
+        image: nickfedor/watchtower
+        environment:
+#          - WATCHTOWER_LOG_LEVEL=debug
+          - TZ=Europe/Belgrade
+          - WATCHTOWER_SCHEDULE=0 0 4 * * *
+          - WATCHTOWER_CLEANUP=true
+          - WATCHTOWER_RUN_ONCE=true
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /home/nikola/.docker/config.json:/config.json:ro
+        restart: unless-stopped

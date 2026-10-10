@@ -1,0 +1,16 @@
+services:
+    jellyfin:
+        container_name: jellyfin
+        hostname: debian-server
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+        ports:
+            - '8096:8096'
+            - '8920:8920'
+        volumes:
+            - '/dockerConfig/Jellyfin:/config'
+            - '/srv/media:/data:ro'
+        restart: unless-stopped
+        image: 'lscr.io/linuxserver/jellyfin:latest'

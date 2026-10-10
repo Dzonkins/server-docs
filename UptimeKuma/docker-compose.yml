@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    uptime-kuma:
+        container_name: uptime-kuma
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=CET
+        ports:
+            - '3001:3001'
+        volumes:
+            - '/dockerConfig/UptimeKuma:/app/data'
+        restart: unless-stopped
+        image: 'louislam/uptime-kuma:2'
