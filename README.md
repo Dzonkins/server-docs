@@ -38,9 +38,14 @@ Docker, samba, unbound and keep alived need to be installed before starting.
 
 ## 📁 Samba
 
+Samba is file sharing server. It is usually used to connect and work with files from windows to server but with some configuring it can work on linux too.
+
 In root of repository copy `smb.conf` file to the `/etc/samba/`. This file containes sample of one share that requires user login and second one is guest folder that everyone can read but nobody can write to it. It is important to note in this simple samba setup every samba user needs to have their unix account because of the permission managment for folders. After creating unix user said user can be added to samba with this command `sudo smbpasswd -a user_name`. Everytime there is a change to config you must restart services with commands `sudo systemctl restart smbd` and `sudo systemctl restart nmbd`. If you want to start samba at boot then you need to do `sudo systemctl enable smbd` and `sudo systemctl enable nmbd`
 
 ## 🔎 Unbound
+
+Unbound is selfhosted DNS resolver which we will use later in this guide to set as upstream DNS in our Pihole instance instead of relying on Google or Cloudflare for DNS.
+
 In root of repository copy `pi-hole.conf` file to the `/etc/unbound/unbound.conf.d`. In this scenario we will be using Pihole in docker and Unbound running on bare system so configuration will be bit different from default one.
 <details>
 <summary><code>Pi-hole.conf</code></summary>
@@ -140,7 +145,10 @@ After configuration is done we need to restart unbound with `sudo systemctl rest
 
 ## 🔁 Keepalived
 
+Keepalived is selfhosted tool for high availabilty in server clusters. We will use it For 2 of our Pihole instances so that when one instance stops working other one covers it.
+
 In root of repository copy `keepalived.conf` file to the `/etc/keepalived/`. Keepalived is necessary if we use multiple Pihole instances. It uses virtual ip adress to combine these two instances and when one of them fails it transfers load to other one depending on priority we set in config. Depending on instance we can set one to be `MASTER` instance and other ones to be `BACKUP`.
+
 <details>
 <summary><code>keepalived.conf</code></summary>
 
