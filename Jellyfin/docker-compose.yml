@@ -1,7 +1,7 @@
 services:
     jellyfin:
         container_name: jellyfin
-        hostname: debian-server
+        hostname: CUSTOM_NAME
         environment:
             - PUID=1000
             - PGID=1000

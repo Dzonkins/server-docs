@@ -1,7 +1,7 @@
 services:
     pihole:
         container_name: pihole
-        hostname: nikola-server
+        hostname: CUSTOM_NAME
         env_file:
             - .env
         ports:
@@ -11,7 +11,7 @@ services:
             - '85:80'
         environment:
             - TZ=CET
-            - WEBPASSWORD=${WEBPASSWORD}
+            - FTLCONF_webserver_api_password=${WEBPASSWORD}
             - FTLCONF_dns_listeningMode=ALL
         volumes:
             - '/dockerConfig/Pihole/etc/pihole:/etc/pihole'

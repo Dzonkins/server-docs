@@ -1,4 +1,3 @@
-version: '3.3'
 services:
     file-browser:
         container_name: file-browser
