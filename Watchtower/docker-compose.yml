@@ -10,5 +10,4 @@ services:
           - WATCHTOWER_RUN_ONCE=true
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
-          - /home/nikola/.docker/config.json:/config.json:ro
         restart: unless-stopped
